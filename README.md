@@ -4,3 +4,5 @@ The basics of threading a process and how to work on the same memory space.
  - [Philosophers Subject](https://github.com/su-omb/philosophers/blob/main/en.subject.pdf)
 ## Useful Source
  - [Multithreading in C](https://www.geeksforgeeks.org/multithreading-c-2/)
+## NOTES:
+ - This project is not finished yet.

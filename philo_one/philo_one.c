@@ -6,7 +6,7 @@
 /*   By: obouykou <obouykou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 19:25:01 by obouykou          #+#    #+#             */
-/*   Updated: 2021/04/05 19:07:22 by obouykou         ###   ########.fr       */
+/*   Updated: 2021/04/05 19:13:09 by obouykou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int		simulate(t_data *data)
 	i = -1;
 	while (1)
 	{
-		
+		data = (void*)data;
 	}
 	return (0);
 }

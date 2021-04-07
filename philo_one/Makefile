@@ -6,7 +6,7 @@
 #    By: obouykou <obouykou@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/28 19:25:29 by obouykou          #+#    #+#              #
-#    Updated: 2021/04/05 19:01:31 by obouykou         ###   ########.fr        #
+#    Updated: 2021/04/07 19:32:47 by obouykou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ LIB = lib_philo.a
 
 MAIN = philo_one.c
 
-FILES = sources/ft_atoi.c sources/init.c sources/utils.c
+FILES = sources/ft_atoi.c sources/init.c sources/utils.c sources/tasks.c sources/monitor.c
 		
 HEADER = includes/philo_one.h
 

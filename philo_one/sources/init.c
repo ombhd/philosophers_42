@@ -6,7 +6,7 @@
 /*   By: obouykou <obouykou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/05 18:30:56 by obouykou          #+#    #+#             */
-/*   Updated: 2021/04/05 19:01:52 by obouykou         ###   ########.fr       */
+/*   Updated: 2021/04/07 18:26:05 by obouykou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ int		init_philo(t_philo *p, int num_of_philos)
 {
 	static int i;
 
-	i = 0;
 	p->num_of_eating = 0;
 	p->index = i;
 	p->lf_index = i;
+	p->limit = 0;
 	p->rf_index = (i++ + 1) % num_of_philos;
 	return (pthread_mutex_init(&p->pl_mutex, NULL));
 }
@@ -31,7 +31,7 @@ int		init_data(t_data *data)
 	if (!(data->philo_trds = (pthread_t *)malloc(
 		  sizeof(pthread_t) * data->num_of_philo)) ||
 		  !(data->forks = (pthread_mutex_t*)malloc(
-			data->num_of_forks * sizeof(pthread_mutex_t))) ||
+			data->num_forks * sizeof(pthread_mutex_t))) ||
 		  !(data->philos = (t_philo *)malloc(
 		  sizeof(t_philo) * data->num_of_philo)))
 	{
@@ -45,5 +45,9 @@ int		init_data(t_data *data)
 			pthread_mutex_init(&data->forks[i], NULL))
 			return (1);
 	}
+	pthread_mutex_init(&data->mutex_philo, NULL);
+	data->t_start = get_time(0U);
+	data->done_eatings = 0;
+	data->dead_philo = 0;
 	return (0);
 }

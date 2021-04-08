@@ -6,7 +6,7 @@
 /*   By: obouykou <obouykou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/05 14:24:41 by obouykou          #+#    #+#             */
-/*   Updated: 2021/04/07 18:55:00 by obouykou         ###   ########.fr       */
+/*   Updated: 2021/04/08 13:18:52 by obouykou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
+#include <string.h>
 #include <pthread.h>
 #include <sys/time.h>
 
@@ -26,7 +27,8 @@ typedef	struct	s_philo
 	unsigned int 	lf_index;
 	unsigned int 	rf_index;
 	unsigned int 	limit;
-	char			is_first_meal;
+	char			task;
+	char			is_dead;
 	pthread_mutex_t pl_mutex;
 	
 }				t_philo;

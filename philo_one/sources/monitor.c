@@ -6,7 +6,7 @@
 /*   By: obouykou <obouykou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 18:54:22 by obouykou          #+#    #+#             */
-/*   Updated: 2021/04/07 19:26:22 by obouykou         ###   ########.fr       */
+/*   Updated: 2021/04/08 13:25:09 by obouykou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,9 @@ void	*dying_checker(void *dt)
 			pthread_mutex_lock(&data->print_msg);
 			printf("%u  %u died\n", get_time(data->t_start), i + 1);
 			pthread_mutex_unlock(&data->mutex_philo);
+			break ;
 		}
-		// usleep(500);
+		// usleep(100);
 	}
 	return (dt);
 }
@@ -36,23 +37,29 @@ void	*dying_checker(void *dt)
 
 void	*eating_checker(void *dt)
 {
-	t_data *data;
-	unsigned int i;
+	t_data 			*data;
+	unsigned int 	i;
+	char 			tab[((t_data*)dt)->num_of_philo];
 
 	data = (t_data *)dt;
 	i = 0;
+	memset(tab, 1, data->num_of_philo);
 	while (1)
 	{
-		if (i == data->num_of_philo)
-			i = 0;
-		if (data->eating_times != -1 && 
-			data->philos[i].num_of_eating == data->eating_times)
+		i %= data->num_of_philo;
+		if (data->philos[i].num_of_eating == data->eating_times)
 		{
-			data->done_eatings++;
-			if (data->done_eatings == data->num_of_philo)
-				pthread_mutex_unlock(&data->mutex_philo);
+			if (tab[i])
+				data->done_eatings++;
+			tab[i] = 0;
 		}
-		// usleep(500);
+		if (data->eating_times != -1 &&
+			data->done_eatings == data->num_of_philo)
+		{
+				pthread_mutex_lock(&data->print_msg);
+				pthread_mutex_unlock(&data->mutex_philo);
+				return (dt);
+		}
 		++i;
 	}
 	return (dt);

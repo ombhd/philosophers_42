@@ -6,7 +6,7 @@
 /*   By: obouykou <obouykou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 19:25:01 by obouykou          #+#    #+#             */
-/*   Updated: 2021/04/07 19:33:34 by obouykou         ###   ########.fr       */
+/*   Updated: 2021/04/08 13:28:41 by obouykou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ void	*philo(void *raw_data)
 	data = (t_data *)raw_data;
 	curr_index = data->curr_philo;
 	p = &data->philos[data->curr_philo];
-	p->is_first_meal = 1;
+	// p->is_first_meal = 1;
 	p->limit = get_time(0U) + data->time2die;
-	pthread_create(&data->dying_checker, NULL, philo, (void *)data);
+	pthread_create(&data->dying_checker, NULL, dying_checker, (void *)data);
 	pthread_detach(data->dying_checker);
 	while (1)
 	{
 		take_forks(data, p);
-		// p->limit = get_time(0U) + data->time2die;
+		p->limit = get_time(0U) + data->time2die;
 		eating(data, p);
 		sleeping(data, p);
 		thinking(data, p);
@@ -41,14 +41,18 @@ int		simulate(t_data *data)
 	unsigned int i;
 
 	i = 0;
-	pthread_create(&data->eating_checker, NULL, philo, (void *)data);
-	pthread_detach(data->philo_trds[i]);
+	pthread_create(&data->eating_checker, NULL,eating_checker, (void *)data);
+	pthread_detach(data->eating_checker);
 	pthread_mutex_lock(&data->mutex_philo);
+	data->t_start = get_time(0U);
+
 	while (i < data->num_of_philo)
 	{
 		data->curr_philo = i;
 		pthread_create(&data->philo_trds[i], NULL, philo, (void *)data);
 		pthread_detach(data->philo_trds[i]);
+		
+		usleep(10);
 		i++;
 	}
 	pthread_mutex_lock(&data->mutex_philo);

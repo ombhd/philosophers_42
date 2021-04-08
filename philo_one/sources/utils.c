@@ -6,7 +6,7 @@
 /*   By: obouykou <obouykou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/05 16:29:30 by obouykou          #+#    #+#             */
-/*   Updated: 2021/04/07 18:50:04 by obouykou         ###   ########.fr       */
+/*   Updated: 2021/04/08 12:10:55 by obouykou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,5 @@ unsigned int get_time(unsigned int start)
 	struct timeval tm;
 
 	gettimeofday(&tm, NULL);
-	return ((1000 * tm.tv_sec + tm.tv_usec / 1000) - start);
+	return (((1000 * tm.tv_sec) + (tm.tv_usec / 1000)) - start);
 }

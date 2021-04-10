@@ -6,7 +6,7 @@
 /*   By: obouykou <obouykou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/05 18:30:56 by obouykou          #+#    #+#             */
-/*   Updated: 2021/04/10 15:20:10 by obouykou         ###   ########.fr       */
+/*   Updated: 2021/04/10 16:03:14 by obouykou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ int	init_data(t_data *data)
 	pthread_mutex_init(&data->mutex_philo, NULL);
 	pthread_mutex_init(&data->print_msg, NULL);
 	data->done_eatings = 0;
-	data->dead_philo = 0;
 	data->t_start = get_time(0U);
 	return (0);
 }

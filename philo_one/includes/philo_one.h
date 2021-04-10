@@ -6,7 +6,7 @@
 /*   By: obouykou <obouykou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/05 14:24:41 by obouykou          #+#    #+#             */
-/*   Updated: 2021/04/10 15:54:18 by obouykou         ###   ########.fr       */
+/*   Updated: 2021/04/10 16:03:02 by obouykou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ typedef struct s_philo
 	unsigned int	rf_index;
 	unsigned int	limit;
 	int				num_of_eating;
-	char			task;
 	char			done;
 	pthread_mutex_t	pl_mutex;
 	struct s_data	*data;
@@ -42,9 +41,7 @@ typedef struct s_data
 	long int		time2sleep;
 	long int		eating_times;
 	unsigned int	done_eatings;
-	char			dead_philo;
 	unsigned int	t_start;
-	unsigned int	curr_philo;
 	unsigned int	ac;
 	pthread_mutex_t	*forks;
 	pthread_t		eating_checker;
@@ -54,7 +51,7 @@ typedef struct s_data
 	t_philo			*philos;
 }				t_data;
 
-int				ft_atoi(const char *str);
+long int		ft_atoi(const char *str);
 int				get_args(int ac, char **av, t_data *data);
 int				verify_args(t_data *data);
 int				init_data(t_data *data);

@@ -6,20 +6,20 @@
 /*   By: obouykou <obouykou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/05 18:33:11 by obouykou          #+#    #+#             */
-/*   Updated: 2021/04/10 13:44:45 by obouykou         ###   ########.fr       */
+/*   Updated: 2021/04/10 16:00:15 by obouykou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	parse_limits_sign(long a, int sign)
+long int	parse_limits_sign(long int a, int sign)
 {
 	if (a < 0 && sign > 0)
 		return (-1);
 	if (a > 0 && sign < 0)
 		return (0);
-	return ((int)a);
+	return (a);
 }
 
-int	ft_atoi(const char *str)
+long int	ft_atoi(const char *str)
 {
 	int		i;
 	int		sign;

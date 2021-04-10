@@ -6,7 +6,7 @@
 /*   By: obouykou <obouykou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/05 16:29:30 by obouykou          #+#    #+#             */
-/*   Updated: 2021/04/10 13:45:19 by obouykou         ###   ########.fr       */
+/*   Updated: 2021/04/10 16:04:23 by obouykou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,18 @@ unsigned int	get_time(unsigned int start)
 
 	gettimeofday(&tm, NULL);
 	return (((1000 * tm.tv_sec) + (tm.tv_usec / 1000)) - start);
+}
+
+void	clean(t_data *data)
+{
+	while (data->num_forks--)
+	{
+		pthread_mutex_destroy(&data->forks[data->num_forks]);
+		pthread_mutex_destroy(&data->philos[data->num_forks].pl_mutex);
+	}
+	free(data->forks);
+	free(data->philos);
+	pthread_mutex_destroy(&data->mutex_philo);
+	pthread_mutex_destroy(&data->print_msg);
+	free(data);
 }

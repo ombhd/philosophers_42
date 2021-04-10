@@ -6,7 +6,7 @@
 /*   By: obouykou <obouykou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/05 18:30:56 by obouykou          #+#    #+#             */
-/*   Updated: 2021/04/10 16:03:14 by obouykou         ###   ########.fr       */
+/*   Updated: 2021/04/10 16:07:40 by obouykou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	init_data(t_data *data)
 		if (init_philo(&data->philos[i], data->num_of_philo) || \
 			pthread_mutex_init(&data->forks[i], NULL))
 			return (1);
+		data->philos[i].data = data;
 	}
 	pthread_mutex_init(&data->mutex_philo, NULL);
 	pthread_mutex_init(&data->print_msg, NULL);

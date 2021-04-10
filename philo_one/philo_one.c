@@ -6,7 +6,7 @@
 /*   By: obouykou <obouykou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 19:25:01 by obouykou          #+#    #+#             */
-/*   Updated: 2021/04/10 15:28:47 by obouykou         ###   ########.fr       */
+/*   Updated: 2021/04/10 16:17:46 by obouykou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,38 +36,21 @@ void	*philo(void *raw_data)
 	return (raw_data);
 }
 
-void	clean(t_data *data)
-{
-	while (data->num_forks--)
-	{
-		pthread_mutex_destroy(&data->forks[data->num_forks]);
-		pthread_mutex_destroy(&data->philos[data->num_forks].pl_mutex);
-	}
-	free(data->forks);
-	free(data->philos);
-	pthread_mutex_destroy(&data->mutex_philo);
-	pthread_mutex_destroy(&data->print_msg);
-	free(data);
-}
-
 int	simulate(t_data *data)
 {
 	unsigned int	i;
-	t_philo			*p;
 	pthread_t		thrd;
 
-	i = 0;
 	if (data->eating_times != -1)
 	{
 		pthread_create(&data->eating_checker, NULL, eating_checker, data);
 		pthread_detach(data->eating_checker);
 	}
 	pthread_mutex_lock(&data->mutex_philo);
+	i = 0;
 	while (i < data->num_of_philo)
 	{
-		p = &data->philos[i];
-		p->data = data;
-		pthread_create(&thrd, NULL, philo, p);
+		pthread_create(&thrd, NULL, philo, &data->philos[i]);
 		pthread_detach(thrd);
 		usleep(50);
 		i++;

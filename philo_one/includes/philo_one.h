@@ -6,7 +6,7 @@
 /*   By: obouykou <obouykou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/05 14:24:41 by obouykou          #+#    #+#             */
-/*   Updated: 2021/04/10 16:03:02 by obouykou         ###   ########.fr       */
+/*   Updated: 2021/04/10 16:19:01 by obouykou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@ typedef struct s_data
 	unsigned int	t_start;
 	unsigned int	ac;
 	pthread_mutex_t	*forks;
-	pthread_t		eating_checker;
-	pthread_t		dying_checker;
 	pthread_mutex_t	mutex_philo;
 	pthread_mutex_t	print_msg;
+	pthread_t		eating_checker;
+	pthread_t		dying_checker;
 	t_philo			*philos;
 }				t_data;
 
@@ -61,5 +61,6 @@ void			tasks(t_data *data, t_philo *philo);
 void			output(unsigned int index, t_data *data, char task);
 void			*dying_checker(void *dt);
 void			*eating_checker(void *dt);
+void			clean(t_data *data);
 
 #endif // !PHILO_ONE_H

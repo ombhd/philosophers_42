@@ -6,7 +6,7 @@
 /*   By: obouykou <obouykou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/05 14:24:41 by obouykou          #+#    #+#             */
-/*   Updated: 2021/04/10 18:55:12 by obouykou         ###   ########.fr       */
+/*   Updated: 2021/04/10 19:28:32 by obouykou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ typedef struct s_philo
 	unsigned int	limit;
 	int				num_of_eating;
 	char			done;
-	char			*name;
 	sem_t			*single_pl_sem;
 	struct s_data	*data;
 }				t_philo;

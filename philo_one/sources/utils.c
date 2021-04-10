@@ -6,13 +6,13 @@
 /*   By: obouykou <obouykou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/05 16:29:30 by obouykou          #+#    #+#             */
-/*   Updated: 2021/04/08 12:10:55 by obouykou         ###   ########.fr       */
+/*   Updated: 2021/04/10 13:45:19 by obouykou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo_one.h"
 
-int		verify_args(t_data *data)
+int	verify_args(t_data *data)
 {
 	if (data->num_of_philo > 200 || data->num_of_philo < 2)
 	{
@@ -24,7 +24,7 @@ int		verify_args(t_data *data)
 		printf("Invalid time argument [valid: >= 60] \n");
 		return (1);
 	}
-	if (data->eating_times == 0)
+	if (data->ac == 6 && data->eating_times <= 0)
 	{
 		printf("Invalid times of eating [ 0 < valid_number] \n");
 		return (1);
@@ -32,7 +32,7 @@ int		verify_args(t_data *data)
 	return (0);
 }
 
-int		get_args(int ac, char **av, t_data *data)
+int	get_args(int ac, char **av, t_data *data)
 {
 	data->num_of_philo = ft_atoi(av[1]);
 	data->num_forks = data->num_of_philo;
@@ -43,14 +43,15 @@ int		get_args(int ac, char **av, t_data *data)
 		data->eating_times = ft_atoi(av[5]);
 	else
 		data->eating_times = -1;
+	data->ac = ac;
 	if (verify_args(data))
 		return (1);
 	return (0);
 }
 
-unsigned int get_time(unsigned int start)
+unsigned int	get_time(unsigned int start)
 {
-	struct timeval tm;
+	struct timeval	tm;
 
 	gettimeofday(&tm, NULL);
 	return (((1000 * tm.tv_sec) + (tm.tv_usec / 1000)) - start);

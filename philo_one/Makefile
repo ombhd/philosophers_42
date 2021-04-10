@@ -6,7 +6,7 @@
 #    By: obouykou <obouykou@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/28 19:25:29 by obouykou          #+#    #+#              #
-#    Updated: 2021/04/07 19:32:47 by obouykou         ###   ########.fr        #
+#    Updated: 2021/04/09 12:07:42 by obouykou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,12 +22,12 @@ HEADER = includes/philo_one.h
 
 OBJECT = $(FILES:.c=.o)
 
-FLAGS = -Wextra -Werror -Wall
+FLAGS = -Wextra -Wall -Werror
 
 all: $(NAME)
 	@echo "\n\033[32m◊◊◊ ------- $(NAME) has been created successfully ------- ◊◊◊\033[0m\n"
 
-$(NAME): $(OBJECT) $(HEADER) $(FILES) $(MAIN)
+$(NAME):  $(HEADER) $(OBJECT) $(FILES) $(MAIN)
 	@ar -rcs $(LIB) $(OBJECT)
 	@echo "\n\033[36m◊◊◊ Producin' object files done! ◊◊◊\033[0m\n"
 	@gcc $(FLAGS) $(MAIN) $(LIB) -o $(NAME)

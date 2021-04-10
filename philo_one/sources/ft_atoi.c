@@ -6,11 +6,11 @@
 /*   By: obouykou <obouykou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/05 18:33:11 by obouykou          #+#    #+#             */
-/*   Updated: 2021/04/05 18:33:32 by obouykou         ###   ########.fr       */
+/*   Updated: 2021/04/10 13:44:45 by obouykou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int			parse_limits_sign(long a, int sign)
+int	parse_limits_sign(long a, int sign)
 {
 	if (a < 0 && sign > 0)
 		return (-1);
@@ -19,7 +19,7 @@ int			parse_limits_sign(long a, int sign)
 	return ((int)a);
 }
 
-int			ft_atoi(const char *str)
+int	ft_atoi(const char *str)
 {
 	int		i;
 	int		sign;

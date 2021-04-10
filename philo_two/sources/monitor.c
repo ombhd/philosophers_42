@@ -6,11 +6,11 @@
 /*   By: obouykou <obouykou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 18:54:22 by obouykou          #+#    #+#             */
-/*   Updated: 2021/04/10 16:12:28 by obouykou         ###   ########.fr       */
+/*   Updated: 2021/04/10 19:11:20 by obouykou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo_one.h"
+#include "../includes/philo_two.h"
 
 void	*dying_checker(void *dt)
 {
@@ -21,14 +21,14 @@ void	*dying_checker(void *dt)
 	data = philo->data;
 	while (!philo->done)
 	{
-		pthread_mutex_lock(&philo->pl_mutex);
+		sem_wait(philo->single_pl_sem);
 		if (get_time(0U) > philo->limit)
 		{
 			output(philo->index, data, 'd');
-			pthread_mutex_unlock(&data->mutex_philo);
+			sem_post(data->sem_main);
 			break ;
 		}
-		pthread_mutex_unlock(&philo->pl_mutex);
+		sem_post(philo->single_pl_sem);
 		usleep(100);
 	}
 	return (dt);
@@ -46,7 +46,7 @@ void	*eating_checker(void *dt)
 			if (data->done_eatings == data->num_of_philo)
 			{
 				output(0U, data, 'l');
-				pthread_mutex_unlock(&data->mutex_philo);
+				sem_post(data->sem_main);
 				return (dt);
 			}
 		}

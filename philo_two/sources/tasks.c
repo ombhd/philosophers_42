@@ -6,17 +6,17 @@
 /*   By: obouykou <obouykou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 17:22:26 by obouykou          #+#    #+#             */
-/*   Updated: 2021/04/10 16:17:50 by obouykou         ###   ########.fr       */
+/*   Updated: 2021/04/10 18:55:40 by obouykou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo_one.h"
+#include "../includes/philo_two.h"
 
 void	output(unsigned int index, t_data *data, char task)
 {
 	unsigned int	time;
 
-	if (pthread_mutex_lock(&data->print_msg))
+	if (sem_wait(data->sem_print) == -1)
 		return ;
 	time = get_time(data->t_start);
 	if (task == 'f')
@@ -37,27 +37,27 @@ void	output(unsigned int index, t_data *data, char task)
 		printf("%u\tEnd of simulation: reached eating limit\n", time);
 		return ;
 	}
-	pthread_mutex_unlock(&data->print_msg);
+	sem_post(data->sem_print);
 }
 
 void	take_forks(t_data *data, t_philo *p)
 {
-	pthread_mutex_lock(&data->forks[p->lf_index]);
+	sem_wait(data->forks);
 	output(p->index, data, 'f');
-	pthread_mutex_lock(&data->forks[p->rf_index]);
+	sem_wait(data->forks);
 	output(p->index, data, 'f');
 }
 
 void	tasks(t_data *data, t_philo *p)
 {
-	pthread_mutex_lock(&p->pl_mutex);
+	sem_wait(p->single_pl_sem);
 	output(p->index, data, 'e');
 	p->limit = get_time(0U) + data->time2die;
 	usleep(data->time2eat * 1000);
 	++p->num_of_eating;
-	pthread_mutex_unlock(&p->pl_mutex);
-	pthread_mutex_unlock(&data->forks[p->lf_index]);
-	pthread_mutex_unlock(&data->forks[p->rf_index]);
+	sem_post(p->single_pl_sem);
+	sem_post(data->forks);
+	sem_post(data->forks);
 	if (p->num_of_eating != data->eating_times)
 	{
 		output(p->index, data, 's');

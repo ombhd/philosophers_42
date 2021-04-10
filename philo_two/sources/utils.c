@@ -6,11 +6,11 @@
 /*   By: obouykou <obouykou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/05 16:29:30 by obouykou          #+#    #+#             */
-/*   Updated: 2021/04/10 16:04:23 by obouykou         ###   ########.fr       */
+/*   Updated: 2021/04/10 19:15:31 by obouykou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo_one.h"
+#include "../includes/philo_two.h"
 
 int	verify_args(t_data *data)
 {
@@ -59,14 +59,9 @@ unsigned int	get_time(unsigned int start)
 
 void	clean(t_data *data)
 {
-	while (data->num_forks--)
-	{
-		pthread_mutex_destroy(&data->forks[data->num_forks]);
-		pthread_mutex_destroy(&data->philos[data->num_forks].pl_mutex);
-	}
-	free(data->forks);
+	sem_unlink("forks");
+	sem_unlink("sem_main");
+	sem_unlink("sem_print");
 	free(data->philos);
-	pthread_mutex_destroy(&data->mutex_philo);
-	pthread_mutex_destroy(&data->print_msg);
 	free(data);
 }

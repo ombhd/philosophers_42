@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_one.c                                        :+:      :+:    :+:   */
+/*   philo_two.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obouykou <obouykou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 19:25:01 by obouykou          #+#    #+#             */
-/*   Updated: 2021/04/10 16:17:46 by obouykou         ###   ########.fr       */
+/*   Updated: 2021/04/10 19:11:04 by obouykou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/philo_one.h"
+#include "includes/philo_two.h"
 
 void	*philo(void *raw_data)
 {
@@ -46,7 +46,7 @@ int	simulate(t_data *data)
 		pthread_create(&data->eating_checker, NULL, eating_checker, data);
 		pthread_detach(data->eating_checker);
 	}
-	pthread_mutex_lock(&data->mutex_philo);
+	sem_wait(data->sem_main);
 	i = 0;
 	while (i < data->num_of_philo)
 	{
@@ -55,8 +55,8 @@ int	simulate(t_data *data)
 		usleep(50);
 		i++;
 	}
-	pthread_mutex_lock(&data->mutex_philo);
-	pthread_mutex_unlock(&data->mutex_philo);
+	sem_wait(data->sem_main);
+	sem_post(data->sem_main);
 	return (0);
 }
 

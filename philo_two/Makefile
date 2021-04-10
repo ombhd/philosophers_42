@@ -6,19 +6,19 @@
 #    By: obouykou <obouykou@student.1337.ma>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/28 19:25:29 by obouykou          #+#    #+#              #
-#    Updated: 2021/04/09 12:07:42 by obouykou         ###   ########.fr        #
+#    Updated: 2021/04/10 16:29:55 by obouykou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = philo_one
+NAME = philo_two
 
 LIB = lib_philo.a
 
-MAIN = philo_one.c
+MAIN = philo_two.c
 
 FILES = sources/ft_atoi.c sources/init.c sources/utils.c sources/tasks.c sources/monitor.c
 		
-HEADER = includes/philo_one.h
+HEADER = includes/philo_two.h
 
 OBJECT = $(FILES:.c=.o)
 

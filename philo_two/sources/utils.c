@@ -6,7 +6,7 @@
 /*   By: obouykou <obouykou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/05 16:29:30 by obouykou          #+#    #+#             */
-/*   Updated: 2021/04/10 19:15:31 by obouykou         ###   ########.fr       */
+/*   Updated: 2021/04/10 19:45:17 by obouykou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,12 @@ unsigned int	get_time(unsigned int start)
 
 void	clean(t_data *data)
 {
+	while (data->num_of_philo--)
+	{
+		sem_post(data->philos[data->num_of_philo].single_pl_sem);
+		sem_close(data->philos[data->num_of_philo].single_pl_sem);
+	}
+	sem_unlink("single_pl_sem");
 	sem_unlink("forks");
 	sem_unlink("sem_main");
 	sem_unlink("sem_print");

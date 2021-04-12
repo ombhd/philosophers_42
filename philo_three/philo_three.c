@@ -6,7 +6,7 @@
 /*   By: obouykou <obouykou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 19:25:01 by obouykou          #+#    #+#             */
-/*   Updated: 2021/04/12 12:33:59 by obouykou         ###   ########.fr       */
+/*   Updated: 2021/04/12 13:07:07 by obouykou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,7 @@ void	*philo(void *raw_data)
 		{
 			++data->done_eatings;
 			sem_post(data->sem_eat);
-
 			p->done = 1;
-			// printf("[index = %d ]======> done eating : [%d]\n", p->index + 1, data->done_eatings);
-			// usleep(100);
 		}
 	}
 	return (raw_data);
@@ -60,10 +57,7 @@ int	simulate(t_data *data)
 			exit(0);
 		}
 		else if (data->philos[i].pid == -1)
-		{
-			printf("Forking Error");
-			return (1);
-		}
+			return (2);
 		i++;
 	}
 	sem_wait(data->sem_main);
@@ -90,7 +84,11 @@ int	main(int ac, char **av)
 	}
 	if (get_args(ac, av, data) || init_data(data))
 		return (1);
-	simulate(data);
+	if (simulate(data))
+	{
+		printf("Forking Error\n");
+		return (2);
+	}
 	clean(data);
 	return (0);
 }

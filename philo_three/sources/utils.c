@@ -6,7 +6,7 @@
 /*   By: obouykou <obouykou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/05 16:29:30 by obouykou          #+#    #+#             */
-/*   Updated: 2021/04/12 12:49:02 by obouykou         ###   ########.fr       */
+/*   Updated: 2021/04/12 13:07:28 by obouykou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ unsigned int	get_time(unsigned int start)
 
 void	clean(t_data *data)
 {
-	unsigned int i;
+	unsigned int	i;
 
 	i = 0;
 	while (i < data->num_of_philo)

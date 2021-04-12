@@ -6,7 +6,7 @@
 /*   By: obouykou <obouykou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 18:54:22 by obouykou          #+#    #+#             */
-/*   Updated: 2021/04/12 12:35:56 by obouykou         ###   ########.fr       */
+/*   Updated: 2021/04/12 13:01:18 by obouykou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	*eating_checker(void *dt)
 	data = (t_data *)dt;
 	if (data->eating_times != -1)
 	{
-		data->done_eatings = 0;
 		while (1)
 		{
 			sem_wait(data->sem_eat);

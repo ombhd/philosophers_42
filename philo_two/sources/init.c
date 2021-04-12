@@ -6,7 +6,7 @@
 /*   By: obouykou <obouykou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/05 18:30:56 by obouykou          #+#    #+#             */
-/*   Updated: 2021/04/12 12:45:36 by obouykou         ###   ########.fr       */
+/*   Updated: 2021/04/12 13:02:44 by obouykou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ int	create_semaphore(const char *name, int value, sem_t **semaphore)
 	}
 	return (0);
 }
-
 
 int	create_semaphores(t_data *data)
 {

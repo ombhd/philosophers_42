@@ -6,20 +6,22 @@
 /*   By: obouykou <obouykou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/05 14:24:41 by obouykou          #+#    #+#             */
-/*   Updated: 2021/04/10 19:28:26 by obouykou         ###   ########.fr       */
+/*   Updated: 2021/04/12 12:25:09 by obouykou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_THREE_H
 # define PHILO_THREE_H
 
+# include <unistd.h>
+# include <sys/types.h>
+# include <sys/time.h>
 # include <stdlib.h>
 # include <stdio.h>
-# include <unistd.h>
+# include <signal.h>
 # include <string.h>
 # include <pthread.h>
 # include <semaphore.h>
-# include <sys/time.h>
 
 typedef struct s_philo
 {
@@ -29,6 +31,7 @@ typedef struct s_philo
 	unsigned int	limit;
 	int				num_of_eating;
 	char			done;
+	pid_t			pid;
 	sem_t			*single_pl_sem;
 	struct s_data	*data;
 }				t_philo;
@@ -47,6 +50,7 @@ typedef struct s_data
 	sem_t			*forks;
 	sem_t			*sem_main;
 	sem_t			*sem_print;
+	sem_t			*sem_eat;
 	pthread_t		eating_checker;
 	pthread_t		dying_checker;
 	t_philo			*philos;

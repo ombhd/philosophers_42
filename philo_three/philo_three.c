@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_two.c                                        :+:      :+:    :+:   */
+/*   philo_three.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: obouykou <obouykou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 19:25:01 by obouykou          #+#    #+#             */
-/*   Updated: 2021/04/10 19:11:04 by obouykou         ###   ########.fr       */
+/*   Updated: 2021/04/12 12:33:59 by obouykou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,11 @@ void	*philo(void *raw_data)
 		if (p->num_of_eating == data->eating_times)
 		{
 			++data->done_eatings;
+			sem_post(data->sem_eat);
+
 			p->done = 1;
+			// printf("[index = %d ]======> done eating : [%d]\n", p->index + 1, data->done_eatings);
+			// usleep(100);
 		}
 	}
 	return (raw_data);
@@ -39,7 +43,6 @@ void	*philo(void *raw_data)
 int	simulate(t_data *data)
 {
 	unsigned int	i;
-	pthread_t		thrd;
 
 	if (data->eating_times != -1)
 	{
@@ -50,9 +53,17 @@ int	simulate(t_data *data)
 	i = 0;
 	while (i < data->num_of_philo)
 	{
-		pthread_create(&thrd, NULL, philo, &data->philos[i]);
-		pthread_detach(thrd);
-		usleep(50);
+		data->philos[i].pid = fork();
+		if (data->philos[i].pid == 0)
+		{
+			philo(&data->philos[i]);
+			exit(0);
+		}
+		else if (data->philos[i].pid == -1)
+		{
+			printf("Forking Error");
+			return (1);
+		}
 		i++;
 	}
 	sem_wait(data->sem_main);

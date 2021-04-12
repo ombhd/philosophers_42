@@ -6,7 +6,7 @@
 /*   By: obouykou <obouykou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/05 18:30:56 by obouykou          #+#    #+#             */
-/*   Updated: 2021/04/10 19:10:19 by obouykou         ###   ########.fr       */
+/*   Updated: 2021/04/12 12:45:03 by obouykou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,29 +43,29 @@ int	alloc_size(void	**ptr, unsigned int len, unsigned int size)
 	return (0);
 }
 
+int	create_semaphore(const char *name, int value, sem_t **semaphore)
+{
+	sem_unlink(name);
+	*semaphore = sem_open(name, O_CREAT | O_EXCL, 700, value);
+	if (*semaphore == SEM_FAILED)
+	{
+		printf("Creating %s semaphore error\n", name);
+		return (1);
+	}
+	return (0);
+}
+
+
 int	create_semaphores(t_data *data)
 {
-	sem_unlink("forks");
-	data->forks = sem_open("forks", O_CREAT | O_EXCL, 700, data->num_forks);
-	if (data->forks == SEM_FAILED)
-	{
-		printf("Creating forks sempahore error\n");
+	if (create_semaphore("forks", data->num_forks, &data->forks))
 		return (1);
-	}
-	sem_unlink("sem_main");
-	data->sem_main = sem_open("sem_main", O_CREAT | O_EXCL, 700, 1);
-	if (data->sem_main == SEM_FAILED)
-	{
-		printf("Creating main_sem semaphore error\n");
+	if (create_semaphore("sem_main", 1, &data->sem_main))
 		return (1);
-	}
-	sem_unlink("sem_print");
-	data->sem_print = sem_open("sem_print", O_CREAT | O_EXCL, 700, 1);
-	if (data->sem_print == SEM_FAILED)
-	{
-		printf("Creating sem_print semaphore error\n");
+	if (create_semaphore("sem_print", 1, &data->sem_print))
 		return (1);
-	}
+	if (create_semaphore("sem_eat", 1, &data->sem_eat))
+		return (1);
 	return (0);
 }
 

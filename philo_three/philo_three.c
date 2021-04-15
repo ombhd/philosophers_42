@@ -6,7 +6,7 @@
 /*   By: obouykou <obouykou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/28 19:25:01 by obouykou          #+#    #+#             */
-/*   Updated: 2021/04/12 13:07:07 by obouykou         ###   ########.fr       */
+/*   Updated: 2021/04/15 13:34:18 by obouykou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void	*philo(void *raw_data)
 		tasks(data, p);
 		if (p->num_of_eating == data->eating_times)
 		{
-			++data->done_eatings;
 			sem_post(data->sem_eat);
 			p->done = 1;
 		}

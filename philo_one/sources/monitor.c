@@ -6,7 +6,7 @@
 /*   By: obouykou <obouykou@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 18:54:22 by obouykou          #+#    #+#             */
-/*   Updated: 2021/04/10 16:12:28 by obouykou         ###   ########.fr       */
+/*   Updated: 2021/06/05 13:04:43 by obouykou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	*eating_checker(void *dt)
 				pthread_mutex_unlock(&data->mutex_philo);
 				return (dt);
 			}
+			usleep(100);
 		}
 	}
 	return (dt);
